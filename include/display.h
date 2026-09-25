@@ -1,15 +1,17 @@
-#ifndef PRINTBASE_H
-#define PRINTBASE_H
+#ifndef DISPLAY_H
+#define DISPLAY_H
 
-#define BITLEN_8   8
-#define BITLEN_16 16
-#define BITLEN_32 32
-#define BITLEN_64 64
+#include <stdbool.h>
 
-#include <stdint.h>
+void setbuffer(void);
+void flush(void);
+bool fgAnsi(int index, char* str);
 
-void printBase10(uint64_t number);
-void printBase2(uint64_t number, int bitlen);
-void printBase16(uint64_t number, int bitlen);
+#define SET_BUFFER                          setbuffer()
+#define FLUSH                               flush()
+#define FG_ANSI(index, str)                 fgAnsi(index, str)
+
+#define CLEAR_CONSOLE                       printf("\033[H\033[2J")
+#define MENU_OPTION(n, str)                 printf("\033[38;5;99m[%d]\033[0m %s\n", n, str)
 
 #endif
